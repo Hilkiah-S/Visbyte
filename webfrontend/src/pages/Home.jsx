@@ -1,7 +1,10 @@
+import Test from "../components/test"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <><Test/></>
+    </div>
   )
 }
 

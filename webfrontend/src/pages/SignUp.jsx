@@ -129,7 +129,7 @@ export default function SignUp() {
             Sign Up
           </button>
           <p className="">
-            Already registerd? <a href="/register" className="text-indigo-600">Login here</a>
+            Already registerd? <a href="/login" className="text-indigo-600">Login here</a>
           </p>
         </form>
       </div>
