@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
   return (
-    <Navbar fluid rounded className="border-b">
-      <Navbar.Brand href="https://flowbite-react.com">
+    <Navbar fluid rounded className="border-b border-gray-700 bg-gray-900 rounded-none">
+      <Navbar.Brand href="/">
         <img
           src="/berhan-logo.jpg"
           className="mr-3 h-6 sm:h-12 rounded-lg"
           alt="Flowbite React Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
           Berhan Platform
         </span>
       </Navbar.Brand>
@@ -23,7 +23,7 @@ const Header = () => {
             label={
               <Avatar
                 alt="User settings"
-                img="/user3.png"
+                img="/user.png"
                 rounded
               />
             }
