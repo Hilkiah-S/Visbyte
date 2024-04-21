@@ -1,16 +1,20 @@
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
-import cors from 'cors'
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 dotenv.config();
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
+<<<<<<< HEAD
 import multer from 'multer';
 import Pdf from 'pdf-parse';
 import { promises as fs } from 'fs';
 import axios from'axios';
+=======
+import questionRoutes from "./routes/questionRoutes.js";
+>>>>>>> 3c8cd2e7fa96af7448dc73188e8d699b11f19eb2
 
 async function readFile() {
     try {
@@ -32,13 +36,14 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
-app.use(cors({origin:"http://localhost:3000", credentials:true}))
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
 app.use("/api/users", userRoutes);
+app.use("/api/exam", questionRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running....");

@@ -6,5 +6,14 @@ async function createDoc(doctitle,address){
         DocumentTitle:doctitle,address
     });
 
+    if(!docresponse){
+        return false;
+    }
+    return docresponse;
+
+
 
 } 
+
+
+module.exports={createDoc};
