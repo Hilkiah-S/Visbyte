@@ -7,14 +7,14 @@ import connectDB from "./config/db.js";
 dotenv.config();
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
-<<<<<<< HEAD
+
 import multer from 'multer';
 import Pdf from 'pdf-parse';
 import { promises as fs } from 'fs';
 import axios from'axios';
-=======
+
 import questionRoutes from "./routes/questionRoutes.js";
->>>>>>> 3c8cd2e7fa96af7448dc73188e8d699b11f19eb2
+
 
 async function readFile() {
     try {
