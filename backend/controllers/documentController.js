@@ -1,6 +1,6 @@
 const docService = require('../service/documentService')
 
-async function createhouse(req, res) {
+async function createDoc(req, res) {
     console.log("house Controller create Entered salesmager");
     try {
         const { 
@@ -16,3 +16,6 @@ async function createhouse(req, res) {
             return res.json({ "success": false, "msg": e.toString() }, 500)
         }
 }
+
+
+module.exports={createDoc};

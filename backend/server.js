@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 dotenv.config();
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
+import Docrouter from"./routes/documentRoute.js";
 
 import multer from 'multer';
 import Pdf from 'pdf-parse';
@@ -41,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
+app.use("/document", Docrouter);
 app.use("/api/users", userRoutes);
 app.use("/api/exam", questionRoutes);
 
