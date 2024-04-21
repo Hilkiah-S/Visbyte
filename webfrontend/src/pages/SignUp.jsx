@@ -18,7 +18,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const [signup] = useSignupMutation();
-  const { userInfo } = useSelector((state) => state.auth);
+  const userInfo  = useSelector((state) => state.auth?.userInfo);
 
   useEffect(() => {
     if (userInfo) {

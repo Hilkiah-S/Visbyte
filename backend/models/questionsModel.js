@@ -8,19 +8,22 @@ const QuestionsSchema = new mongoose.Schema(
             type: String,
         },
     
-        choice_a: {
+        choicea: {
             type: String,
         },
-        choice_b: {
+        choiceb: {
             type: String,
         },
-        choice_c: {
+        choicec: {
             type: String,
         },
-        choice_d: {
+        choiced: {
             type: String,
         },
-        answer: {
+        answers: {
+            type: String,
+        },
+        timeall: {
             type: String,
         }
     }
