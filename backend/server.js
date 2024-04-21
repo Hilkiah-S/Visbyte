@@ -57,32 +57,11 @@ app.post('/pdf2text', upload.single('pdfFile'), (req, res) => {
       // res.send({ text: data.text });
      
 
-const encodedParams = new URLSearchParams();
-encodedParams.set('voice_code', 'en-US-1');
-encodedParams.set('text', data.text);
-encodedParams.set('speed', '1.00');
-encodedParams.set('pitch', '1.00');
-encodedParams.set('output_type', 'audio_url');
 
-const options = {
-  method: 'POST',
-  url: 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize',
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded',
-    'X-RapidAPI-Key': '895f17ba78mshd004bc844e2d529p121fc7jsn09c2a01a6008',
-    'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
-  },
-  data: encodedParams,
-};
 
 try {
-	const response = sendRequest(options);
-	// console.log(response.data);
-
-  async function sendRequest (options){
-    await axios.request(options);
-  }
-  res.send({ audio: response });
+	
+  res.send({ text: data.text });
 } catch (error) {
 	console.error(error);
 }
