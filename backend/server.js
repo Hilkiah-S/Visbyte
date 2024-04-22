@@ -47,6 +47,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/exam", questionRoutes);
 
 app.get("/", (req, res) => {
+  console.log(req);
   res.send("API is running....");
 });
 // app.post('/pdf2text', upload.single('pdfFile'), (req, res) => {
