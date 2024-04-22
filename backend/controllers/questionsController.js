@@ -2,17 +2,18 @@ import Questions from "../models/questionsModel.js";
 
 // Add questions
 const addQuestionController = async (req, res) => {
-  const { code, question, choice_a, choice_b, choice_c, choice_d, answer } =
+  const { code, question, choicea, choiceb, choicec, choiced, answers, timeall } =
     req.body;
 
   if (
     !code ||
     !question ||
-    !choice_a ||
-    !choice_b ||
-    !choice_c ||
-    !choice_d ||
-    !answer
+    !choicea ||
+    !choiceb ||
+    !choicec ||
+    !choiced ||
+    !answers || 
+    !timeall
   ) {
     res.status(400).json({ message: "Bad request." });
   }
@@ -21,11 +22,12 @@ const addQuestionController = async (req, res) => {
     const response = await Questions.create({
       code,
       question,
-      choice_a,
-      choice_b,
-      choice_c,
-      choice_d,
-      answer,
+      choicea,
+      choiceb,
+      choicec,
+      choiced,
+      answers,
+      timeall,
     });
 
     res.status(201).json({ message: "Question succesfully added." });
