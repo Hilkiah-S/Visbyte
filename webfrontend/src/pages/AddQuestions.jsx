@@ -125,7 +125,7 @@ const AddQuestion = () => {
             <div className="mb-2 block">
               <Label
                 htmlFor="question"
-                value="Duration"
+                value="Duration*"
                 className="text-gray-200"
               />
             </div>
@@ -142,7 +142,7 @@ const AddQuestion = () => {
             <div className="mb-2 block">
               <Label
                 htmlFor="question"
-                value="Answer"
+                value="Answer*"
                 className="text-gray-200"
               />
             </div>
@@ -150,8 +150,8 @@ const AddQuestion = () => {
             <fieldset className="flex max-w-md gap-4">
               <div className="flex items-center gap-2">
                 <Radio
-                  id="united-state"
-                  name="countries"
+                  id="choice1"
+                  name="question"
                   value="1"
                   {...register("answers")}
                 />
@@ -161,8 +161,8 @@ const AddQuestion = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Radio
-                  id="germany"
-                  name="countries"
+                  id="choice2"
+                  name="question"
                   value="2"
                   {...register("answers")}
                 />
@@ -172,8 +172,8 @@ const AddQuestion = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Radio
-                  id="spain"
-                  name="countries"
+                  id="choice3"
+                  name="question"
                   value="3"
                   {...register("answers")}
                 />
@@ -183,8 +183,8 @@ const AddQuestion = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Radio
-                  id="uk"
-                  name="countries"
+                  id="choice4"
+                  name="question"
                   value="4"
                   {...register("answers")}
                 />
