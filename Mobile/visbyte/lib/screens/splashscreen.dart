@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Login()));
     });
@@ -43,25 +43,35 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.orangeAccent, Colors.deepOrange],
-            // colors: [Color.fromARGB(255, 35, 35, 35), Colors.black],
+            gradient:
+                //  LinearGradient(
+                //   begin: Alignment.topRight,
+                //   end: Alignment.bottomLeft,
+                //   colors: [Colors.orangeAccent, Colors.deepOrange],
+                //   // colors: [Color.fromARGB(255, 35, 35, 35), Colors.black],
+                // ),
+                LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Color.fromARGB(255, 31, 29, 29)!, // Light grey color
+            Color.fromARGB(255, 31, 29, 29)!, // Much darker shade of grey
+          ],
+        )),
+        child: Center(
+          child:
+              // Image.asset('assets/logo/logo.png')
+              SizedBox(
+            width: 300,
+            height: 400,
+            child: RiveAnimation.asset(
+              'assets/rive/flame_rivetober.riv',
+              fit: BoxFit.cover,
+
+              // This will cover the circle area
+            ),
           ),
         ),
-        child: Center(child: Image.asset('assets/logo/logo.png')
-            //     SizedBox(
-            //   width: 300,
-            //   height: 400,
-            //   child: RiveAnimation.asset(
-            //     'assets/rive/flame_rivetober.riv',
-            //     fit: BoxFit.cover,
-
-            //     // This will cover the circle area
-            //   ),
-            // ),
-            ),
       ),
     );
   }
