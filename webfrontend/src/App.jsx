@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Header from "./components/Header";
 import AddQuestions from "./pages/AddQuestions";
+import AddFile from "./pages/AddFile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/add-question" element={<AddQuestions />} />
+            <Route path="/add-file" element={<AddFile />} />
           </Routes>
         </div>
       </BrowserRouter>

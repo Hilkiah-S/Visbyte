@@ -35,7 +35,10 @@ const AddQuestion = () => {
           </h2>
           <div className="flex justify-center items-center gap-3">
             <p className="text-gray-50">Course code: </p>
-            <TextInput {...register("code")} />
+            <TextInput
+              {...register("code")}
+              className="bg-gray-700 border-gray-500 text-gray-100"
+            />
           </div>
         </div>
         <div>
@@ -52,6 +55,7 @@ const AddQuestion = () => {
             placeholder="Question"
             shadow
             {...register("question")}
+            className="bg-gray-700 border-gray-500 text-gray-100"
           />
         </div>
         <div>
@@ -68,6 +72,7 @@ const AddQuestion = () => {
             placeholder="Choice A"
             shadow
             {...register("choicea")}
+            className="bg-gray-700 border-gray-500 text-gray-100"
           />
         </div>
         <div>
@@ -84,6 +89,7 @@ const AddQuestion = () => {
             placeholder="Choice B"
             shadow
             {...register("choiceb")}
+            className="bg-gray-700 border-gray-500 text-gray-100"
           />
         </div>
 
@@ -101,6 +107,7 @@ const AddQuestion = () => {
             placeholder="Choice C"
             shadow
             {...register("choicec")}
+            className="bg-gray-700 border-gray-500 text-gray-100"
           />
         </div>
         <div>
@@ -117,6 +124,7 @@ const AddQuestion = () => {
             placeholder="Choice D"
             shadow
             {...register("choiced")}
+            className="bg-gray-700 border-gray-500 text-gray-100"
           />
         </div>
 
@@ -134,6 +142,7 @@ const AddQuestion = () => {
               type="text"
               placeholder="Duration"
               shadow
+              className="bg-gray-700 border-gray-500 text-gray-100"
               {...register("timeall")}
             />
           </div>
