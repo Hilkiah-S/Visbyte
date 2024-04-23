@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
-      <div>{/* <h1 className="">Hello user Welcome to berhan</h1> */}</div>
+    <div className="mt-[-100px]">
       <div className="py-10 sm:flex justify-center items-center h-screen gap-10">
         <Card className="max-w-sm bg-gray-800 border border-gray-700">
           <h5 className="text-2xl font-bold tracking-tight text-white">
-            Learning resources
+            Exam Questions
           </h5>
           <p className="font-normal text-gray-300 dark:text-gray-400">
             Here are the biggest enterprise technology acquisitions of 2021 so
@@ -34,13 +33,13 @@ const Home = () => {
         </Card>
         <Card className="max-w-sm bg-gray-800 border border-gray-700">
           <h5 className="text-2xl font-bold tracking-tight text-white">
-            Learning resources
+            Learning Resources
           </h5>
           <p className="font-normal text-gray-300 dark:text-gray-400">
             Here are the biggest enterprise technology acquisitions of 2021 so
             far, in reverse chronological order.
           </p>
-          <Link to={"/add-question"}>
+          <Link to={"/add-file"}>
             <Button className="bg-gradient-to-r from-orange-400 to-orange-600">
               Get started
               <svg
