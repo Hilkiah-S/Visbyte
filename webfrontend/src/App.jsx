@@ -5,6 +5,8 @@ import SignIn from "./pages/SignIn";
 import Header from "./components/Header";
 import AddQuestions from "./pages/AddQuestions";
 import AddFile from "./pages/AddFile";
+import ViewQuestions from "./pages/ViewQuestions";
+import Footers from "./components/Footer";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
             <Route path="/register" element={<SignUp />} />
             <Route path="/add-question" element={<AddQuestions />} />
             <Route path="/add-file" element={<AddFile />} />
+            <Route path="/view-questions" element={<ViewQuestions />} />
           </Routes>
+          <Footers/>
         </div>
       </BrowserRouter>
     </>

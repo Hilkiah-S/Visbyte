@@ -1,4 +1,4 @@
-import { Button, Label, Radio, TextInput, Textarea } from "flowbite-react";
+import { Button, Label, Radio, Textarea } from "flowbite-react";
 import { useAddQuestionMutation } from "../slices/questionApiSlice";
 import { useForm } from "react-hook-form";
 
@@ -19,14 +19,14 @@ const AddQuestion = () => {
       console.log(res);
       reset();
     } catch (err) {
-      // setError("Email or password Incorrect.");
       console.log(err);
+      5;
     }
   };
   return (
     <div className="flex justify-center items-center my-10">
       <form
-        className="flex sm:w-[700px] flex-col gap-4 border border-gray-700 p-5 rounded-md shadow-md bg-gray-800"
+        className="flex sm:w-[700px] flex-col gap-4 border border-gray-700 p-10 rounded-md shadow-md bg-gray-950"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex justify-between">
@@ -35,9 +35,9 @@ const AddQuestion = () => {
           </h2>
           <div className="flex justify-center items-center gap-3">
             <p className="text-gray-50">Course code: </p>
-            <TextInput
+            <input
               {...register("code")}
-              className="bg-gray-700 border-gray-500 text-gray-100"
+              className="bg-gray-900 border border-gray-700 text-gray-100 py-3 rounded-lg"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@ const AddQuestion = () => {
             placeholder="Question"
             shadow
             {...register("question")}
-            className="bg-gray-700 border-gray-500 text-gray-100"
+            className="bg-gray-900  border-gray-700 text-gray-100"
           />
         </div>
         <div>
@@ -72,7 +72,7 @@ const AddQuestion = () => {
             placeholder="Choice A"
             shadow
             {...register("choicea")}
-            className="bg-gray-700 border-gray-500 text-gray-100"
+            className="bg-gray-900 border-gray-700 text-gray-100"
           />
         </div>
         <div>
@@ -89,7 +89,7 @@ const AddQuestion = () => {
             placeholder="Choice B"
             shadow
             {...register("choiceb")}
-            className="bg-gray-700 border-gray-500 text-gray-100"
+            className="bg-gray-900 border-gray-700 text-gray-100"
           />
         </div>
 
@@ -107,7 +107,7 @@ const AddQuestion = () => {
             placeholder="Choice C"
             shadow
             {...register("choicec")}
-            className="bg-gray-700 border-gray-500 text-gray-100"
+            className="bg-gray-900 border-gray-700 text-gray-100"
           />
         </div>
         <div>
@@ -124,7 +124,7 @@ const AddQuestion = () => {
             placeholder="Choice D"
             shadow
             {...register("choiced")}
-            className="bg-gray-700 border-gray-500 text-gray-100"
+            className="bg-gray-900 border-gray-700 text-gray-100"
           />
         </div>
 
@@ -132,17 +132,16 @@ const AddQuestion = () => {
           <div>
             <div className="mb-2 block">
               <Label
-                htmlFor="question"
+                htmlFor="duration"
                 value="Duration*"
                 className="text-gray-200"
               />
             </div>
-            <TextInput
-              id="choiced"
+            <input
+              id="duration"
               type="text"
               placeholder="Duration"
-              shadow
-              className="bg-gray-700 border-gray-500 text-gray-100"
+              className="bg-gray-900 border border-gray-700 text-gray-100 py-3 rounded-lg"
               {...register("timeall")}
             />
           </div>
@@ -164,7 +163,7 @@ const AddQuestion = () => {
                   value="1"
                   {...register("answers")}
                 />
-                <Label className="text-gray-50" htmlFor="united-state">
+                <Label className="text-gray-50" >
                   A
                 </Label>
               </div>
@@ -175,7 +174,7 @@ const AddQuestion = () => {
                   value="2"
                   {...register("answers")}
                 />
-                <Label className="text-gray-50" htmlFor="germany">
+                <Label className="text-gray-50">
                   B
                 </Label>
               </div>
@@ -186,7 +185,7 @@ const AddQuestion = () => {
                   value="3"
                   {...register("answers")}
                 />
-                <Label className="text-gray-50" htmlFor="spain">
+                <Label className="text-gray-50" >
                   C
                 </Label>
               </div>
@@ -197,7 +196,7 @@ const AddQuestion = () => {
                   value="4"
                   {...register("answers")}
                 />
-                <Label className="text-gray-50" htmlFor="uk">
+                <Label className="text-gray-50">
                   D
                 </Label>
               </div>
@@ -206,7 +205,7 @@ const AddQuestion = () => {
         </div>
 
         <Button
-          className="bg-gradient-to-r from-orange-400 to-orange-600"
+          className="bg-gray-950 border-gray-700 rounded-lg hover:bg-gray-800"
           type="submit"
           disabled={isSubmitting}
         >
