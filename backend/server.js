@@ -8,6 +8,7 @@ dotenv.config();
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 // import Docrouter from"./routes/documentRoute.js";
+import studRoutes from "./routes/studentRoute.js"
 
 import multer from 'multer';
 import Pdf from 'pdf-parse';
@@ -45,6 +46,7 @@ app.use(cookieParser());
 // app.use("/document", Docrouter);
 app.use("/api/users", userRoutes);
 app.use("/api/exam", questionRoutes);
+app.use("/api/students", studRoutes)
 
 app.get("/", (req, res) => {
   console.log(req);
