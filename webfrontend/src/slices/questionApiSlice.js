@@ -10,8 +10,16 @@ export const questionApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    viewQuestion: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/exam/get-question`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
   }),
 });
 
-export const { useAddQuestionMutation } =
+export const { useAddQuestionMutation, useViewQuestionMutation } =
 questionApiSlice;

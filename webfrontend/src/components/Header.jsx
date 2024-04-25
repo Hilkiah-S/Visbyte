@@ -4,7 +4,11 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
   return (
-    <Navbar fluid rounded className="border-b border-gray-700 bg-gray-900 rounded-none">
+    <Navbar
+      fluid
+      rounded
+      className="border-b border-gray-700 bg-gray-950 rounded-none"
+    >
       <Navbar.Brand href="/">
         <img
           src="/berhan-logo.jpg"
@@ -20,13 +24,7 @@ const Header = () => {
           <Dropdown
             arrowIcon={false}
             inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="/user.png"
-                rounded
-              />
-            }
+            label={<Avatar alt="User settings" img="/user.png" rounded />}
           >
             <Dropdown.Header>
               <span className="block text-sm">{userInfo.name}</span>
@@ -39,7 +37,9 @@ const Header = () => {
         </div>
       ) : (
         <div className="flex md:order-2">
-          <Button className="bg-gradient-to-r from-orange-400 to-orange-500">Sign In</Button>
+          <Button className="bg-gradient-to-r from-orange-400 to-orange-500">
+            Sign In
+          </Button>
         </div>
       )}
     </Navbar>
