@@ -7,6 +7,7 @@ import 'package:visbyte/screens/InternetQuestions.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'dart:ui';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:get_storage/get_storage.dart';
 // import 'package:tutorialapp/sidebarsight.dart';
 
 class Inputcode extends StatefulWidget {
@@ -17,6 +18,7 @@ class Inputcode extends StatefulWidget {
 }
 
 class _InputcodeState extends State<Inputcode> {
+  final box = GetStorage();
   FlutterTts flutterTts = FlutterTts();
   late String spoken;
   SpeechToText stt = SpeechToText();
@@ -28,10 +30,11 @@ class _InputcodeState extends State<Inputcode> {
   Color miccolored = Color.fromARGB(255, 236, 112, 40);
   Color miccolor = Color.fromARGB(255, 131, 130, 130);
   Color miccolorreserv = Color.fromARGB(255, 131, 130, 130);
+  bool Usegyroscope = true;
   @override
   void initState() {
     super.initState();
-
+    box.write('useGyroscope', true);
     codetext = TextEditingController();
     flutterTts.setSpeechRate(0.4);
     flutterTts.speak(
@@ -109,7 +112,7 @@ class _InputcodeState extends State<Inputcode> {
                         child: Column(children: [
                           CustomPopupWidget(
                             text:
-                                'Would you like to take the exam with voice based response instead of the Gyroscope function?',
+                                'Use Voice based response, instead of the Gyroscope function?',
                           ),
 
                           Padding(
@@ -334,7 +337,7 @@ class CustomPopupWidget extends StatefulWidget {
 
 class _CustomPopupWidgetState extends State<CustomPopupWidget> {
   bool isSwitched = false;
-
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -362,6 +365,9 @@ class _CustomPopupWidgetState extends State<CustomPopupWidget> {
               Switch(
                 value: isSwitched,
                 onChanged: (value) {
+                  box.write('useGyroscope', !value);
+                  print("box");
+                  print(box.read('useGyroscope'));
                   setState(() {
                     isSwitched = value;
                   });

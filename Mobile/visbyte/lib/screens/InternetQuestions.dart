@@ -1,5 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 // import 'package:tutorialapp/finalpage.dart';
+import 'package:visbyte/global/globals.dart';
 import 'dart:async';
 import 'package:vibration/vibration.dart';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -8,6 +13,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 // import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 // import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:math';
+
+import 'package:visbyte/widgets/listening_animaiton.dart';
 
 class InternetquestionSight extends StatefulWidget {
   // const InternetquestionSight({super.key});
@@ -24,6 +31,7 @@ class InternetquestionSight extends StatefulWidget {
 class _InternetquestionSightState extends State<InternetquestionSight>
     with WidgetsBindingObserver {
   ScrollController _scrollController = ScrollController();
+  String lastchar = "";
   late bool firsttime;
   late Timer _returntimer;
   int _returnsecondsRemaining = 30;
@@ -38,6 +46,9 @@ class _InternetquestionSightState extends State<InternetquestionSight>
   Color cColor = Colors.grey;
   Color dColor = Colors.grey;
   Color unselected = Colors.grey;
+  final box = GetStorage();
+  late String spoken;
+  SpeechToText stt = SpeechToText();
   addanswers() {
     for (int i = 0; i < widget.questions.length; i++) {
       answers.add(widget.questions[i].answers);
@@ -102,6 +113,58 @@ class _InternetquestionSightState extends State<InternetquestionSight>
     }
   }
 
+  void afterListenInput() {
+    if (spoken.toLowerCase() == 'a' || spoken == "one") {
+      flutterTts.setSpeechRate(0.4);
+      flutterTts
+          .speak("You Chose A" + "${widget.questions[currentindex].choicea}");
+      Determiner = 1;
+      useranswers[currentindex] = Determiner;
+      mixcolors();
+      setState(() {
+        lastanswer = "A";
+      });
+    }
+    if (spoken.toLowerCase() == 'b' || spoken == "two") {
+      flutterTts.setSpeechRate(0.4);
+      flutterTts
+          .speak("You Chose B" + "${widget.questions[currentindex].choiceb}");
+      Determiner = 2;
+      useranswers[currentindex] = Determiner;
+      mixcolors();
+
+      setState(() {
+        lastanswer = "B";
+      });
+    }
+    if (spoken.toLowerCase() == 'c' || spoken == "three") {
+      Vibration.vibrate();
+
+      flutterTts.setSpeechRate(0.4);
+      flutterTts
+          .speak("You Chose C" + "${widget.questions[currentindex].choicec}");
+      Determiner = 3;
+      useranswers[currentindex] = Determiner;
+      mixcolors();
+      setState(() {
+        lastanswer = "C";
+      });
+    }
+    if (spoken.toLowerCase() == 'd' || spoken == "four") {
+      Vibration.vibrate();
+
+      flutterTts.setSpeechRate(0.4);
+      flutterTts
+          .speak("You chose D" + "${widget.questions[currentindex].choiced}");
+      setState(() {
+        lastanswer = "D";
+      });
+      Determiner = 4;
+      useranswers[currentindex] = Determiner;
+      mixcolors();
+    }
+  }
+
   String lastanswer = "none";
   double gx = 0, gy = 0, gz = 0;
   String anylong = "";
@@ -140,12 +203,17 @@ class _InternetquestionSightState extends State<InternetquestionSight>
   List indexes = [];
   List indexescopy = [];
   List randomized = [];
+  void _onChange() {
+    setState(() {});
+  }
+
   @override
   void initState() {
     addanswers();
     addblankanswers();
     mixcolors();
     firsttime = true;
+    notifier.addListener(_onChange);
     // disableScreenshot();
 
     _secondsRemaining = widget.seconds * 60;
@@ -182,7 +250,7 @@ class _InternetquestionSightState extends State<InternetquestionSight>
   void dispose() {
     _timer.cancel();
     flutterTts.stop();
-
+    notifier.removeListener(_onChange);
     _returntimer.cancel();
     WidgetsBinding.instance.removeObserver(this);
     _gyroscopeSubscription.cancel();
@@ -345,140 +413,314 @@ class _InternetquestionSightState extends State<InternetquestionSight>
             speakthewhole();
           },
           onLongPress: () {
-            setState(() {
-              floodgate = true;
-            });
-            if (floodgate == true) {
-              flutterTts.setSpeechRate(0.4);
-              flutterTts.speak(anylarge);
-              if (true) {
-                //  _gyroscopeSubscription=
-                // accelerometerEvents.listen((AccelerometerEvent event) {
-                //   setState(() {
-                //     x = event.x;
-                //     y = event.y;
-                //   });
-                //   if (x > 7) {
-                //     flutterTts.setSpeechRate(0.4);
-                //     flutterTts.speak("You Chose A " +
-                //         "${widget.questions[currentindex].choicea}");
-                //     Determiner = 1;
-                //     useranswers[currentindex] = Determiner;
-                //     mixcolors();
-                //     Vibration.vibrate();
-                //     setState(() {
-                //       lastanswer = "A";
-                //     });
-                //   }
-                //   if (x < -7) {
-                //     flutterTts.setSpeechRate(0.4);
-                //     flutterTts.speak("You Chose B " +
-                //         "${widget.questions[currentindex].choiceb}");
-                //     Determiner = 2;
-                //     useranswers[currentindex] = Determiner;
-                //     mixcolors();
-                //     Vibration.vibrate();
-                //     setState(() {
-                //       lastanswer = "B";
-                //     });
-                //   }
-                //   if (y > 7) {
-                //     Vibration.vibrate();
-
-                //     flutterTts.setSpeechRate(0.4);
-                //     flutterTts.speak("You Chose C " +
-                //         "${widget.questions[currentindex].choicec}");
-                //     Determiner = 3;
-                //     useranswers[currentindex] = Determiner;
-                //     mixcolors();
-                //     setState(() {
-                //       lastanswer = "C";
-                //     });
-                //   }
-                //   if (y < -5) {
-                //     Vibration.vibrate();
-
-                //     flutterTts.setSpeechRate(0.4);
-                //     flutterTts.speak("You chose D " +
-                //         "${widget.questions[currentindex].choiced}");
-                //     setState(() {
-                //       lastanswer = "D";
-                //     });
-                //     Determiner = 4;
-                //     useranswers[currentindex] = Determiner;
-                //     mixcolors();
-
-                //     //
-                //   }
-
-                gyroscopeEvents.listen((GyroscopeEvent event) {
-                  setState(() {
-                    // gx = event.x;
-                    gy = event.y;
-                    gz = event.z;
-                  });
-
-                  if (gz >= 2) {
-                    flutterTts.setSpeechRate(0.4);
-                    flutterTts.speak("You Chose A" +
-                        "${widget.questions[currentindex].choicea}");
-                    Determiner = 1;
-                    useranswers[currentindex] = Determiner;
-                    mixcolors();
-                    Vibration.vibrate();
-                    setState(() {
-                      lastanswer = "A";
-                    });
-                  }
-                  if (gz <= -2) {
-                    flutterTts.setSpeechRate(0.4);
-                    flutterTts.speak("You Chose B" +
-                        "${widget.questions[currentindex].choiceb}");
-                    Determiner = 2;
-                    useranswers[currentindex] = Determiner;
-                    mixcolors();
-                    Vibration.vibrate();
-                    setState(() {
-                      lastanswer = "B";
-                    });
-                  }
-                  if (gy < -4) {
-                    Vibration.vibrate();
-
-                    flutterTts.setSpeechRate(0.4);
-                    flutterTts.speak("You Chose C" +
-                        "${widget.questions[currentindex].choicec}");
-                    Determiner = 3;
-                    useranswers[currentindex] = Determiner;
-                    mixcolors();
-                    setState(() {
-                      lastanswer = "C";
-                    });
-                  }
-                  if (gy > 5) {
-                    Vibration.vibrate();
-
-                    flutterTts.setSpeechRate(0.4);
-                    flutterTts.speak("You chose D" +
-                        "${widget.questions[currentindex].choiced}");
-                    setState(() {
-                      lastanswer = "D";
-                    });
-                    Determiner = 4;
-                    useranswers[currentindex] = Determiner;
-                    mixcolors();
-                  }
-                });
-              } else {
-                flutterTts.setSpeechRate(0.4);
-                flutterTts.speak("Please hold your phone still, first");
-              }
+            if (box.read('useGyroscope')) {
               setState(() {
-                floodgate = false;
+                floodgate = true;
               });
+              if (floodgate == true) {
+                flutterTts.setSpeechRate(0.4);
+                flutterTts.speak(anylarge);
+                if (true) {
+                  //  _gyroscopeSubscription=
+                  // accelerometerEvents.listen((AccelerometerEvent event) {
+                  //   setState(() {
+                  //     x = event.x;
+                  //     y = event.y;
+                  //   });
+                  //   if (x > 7) {
+                  //     flutterTts.setSpeechRate(0.4);
+                  //     flutterTts.speak("You Chose A " +
+                  //         "${widget.questions[currentindex].choicea}");
+                  //     Determiner = 1;
+                  //     useranswers[currentindex] = Determiner;
+                  //     mixcolors();
+                  //     Vibration.vibrate();
+                  //     setState(() {
+                  //       lastanswer = "A";
+                  //     });
+                  //   }
+                  //   if (x < -7) {
+                  //     flutterTts.setSpeechRate(0.4);
+                  //     flutterTts.speak("You Chose B " +
+                  //         "${widget.questions[currentindex].choiceb}");
+                  //     Determiner = 2;
+                  //     useranswers[currentindex] = Determiner;
+                  //     mixcolors();
+                  //     Vibration.vibrate();
+                  //     setState(() {
+                  //       lastanswer = "B";
+                  //     });
+                  //   }
+                  //   if (y > 7) {
+                  //     Vibration.vibrate();
+
+                  //     flutterTts.setSpeechRate(0.4);
+                  //     flutterTts.speak("You Chose C " +
+                  //         "${widget.questions[currentindex].choicec}");
+                  //     Determiner = 3;
+                  //     useranswers[currentindex] = Determiner;
+                  //     mixcolors();
+                  //     setState(() {
+                  //       lastanswer = "C";
+                  //     });
+                  //   }
+                  //   if (y < -5) {
+                  //     Vibration.vibrate();
+
+                  //     flutterTts.setSpeechRate(0.4);
+                  //     flutterTts.speak("You chose D " +
+                  //         "${widget.questions[currentindex].choiced}");
+                  //     setState(() {
+                  //       lastanswer = "D";
+                  //     });
+                  //     Determiner = 4;
+                  //     useranswers[currentindex] = Determiner;
+                  //     mixcolors();
+
+                  //     //
+                  //   }
+
+                  gyroscopeEvents.listen((GyroscopeEvent event) {
+                    setState(() {
+                      // gx = event.x;
+                      gy = event.y;
+                      gz = event.z;
+                    });
+
+                    if (gz >= 2) {
+                      flutterTts.setSpeechRate(0.4);
+                      flutterTts.speak("You Chose A" +
+                          "${widget.questions[currentindex].choicea}");
+                      Determiner = 1;
+                      useranswers[currentindex] = Determiner;
+                      mixcolors();
+                      Vibration.vibrate();
+                      setState(() {
+                        lastanswer = "A";
+                      });
+                    }
+                    if (gz <= -2) {
+                      flutterTts.setSpeechRate(0.4);
+                      flutterTts.speak("You Chose B" +
+                          "${widget.questions[currentindex].choiceb}");
+                      Determiner = 2;
+                      useranswers[currentindex] = Determiner;
+                      mixcolors();
+                      Vibration.vibrate();
+                      setState(() {
+                        lastanswer = "B";
+                      });
+                    }
+                    if (gy < -4) {
+                      Vibration.vibrate();
+
+                      flutterTts.setSpeechRate(0.4);
+                      flutterTts.speak("You Chose C" +
+                          "${widget.questions[currentindex].choicec}");
+                      Determiner = 3;
+                      useranswers[currentindex] = Determiner;
+                      mixcolors();
+                      setState(() {
+                        lastanswer = "C";
+                      });
+                    }
+                    if (gy > 5) {
+                      Vibration.vibrate();
+
+                      flutterTts.setSpeechRate(0.4);
+                      flutterTts.speak("You chose D" +
+                          "${widget.questions[currentindex].choiced}");
+                      setState(() {
+                        lastanswer = "D";
+                      });
+                      Determiner = 4;
+                      useranswers[currentindex] = Determiner;
+                      mixcolors();
+                    }
+                  });
+                } else {
+                  flutterTts.setSpeechRate(0.4);
+                  flutterTts.speak("Please hold your phone still, first");
+                }
+                setState(() {
+                  floodgate = false;
+                });
+              }
             }
+
+            if (!box.read('useGyroscope')) {
+              flutterTts.stop();
+
+              Future<void> startListening() async {
+                // await flutterTts.speak("Listening");
+
+                Future.delayed(Duration(seconds: 5), () {
+                  Navigator.pop(context);
+                  afterListenInput();
+                  setState(() {});
+                });
+                try {
+                  var available = await stt.initialize();
+                  print("STT initialized: $available");
+                  if (available) {
+                    stt.listen(
+                      onResult: (result) {
+                        spoken = result.recognizedWords;
+
+                        print("Result received: $spoken");
+                        if (spoken.isNotEmpty) {
+                          setState(() {
+                            String extractAndUpdateSpoken(String spoken) {
+                              spoken = spoken.trim();
+
+                              int lastSpaceIndex = spoken.lastIndexOf(' ');
+                              if (lastSpaceIndex != -1 &&
+                                  lastSpaceIndex + 1 < spoken.length) {
+                                String lastCharacter = spoken
+                                    .substring(lastSpaceIndex + 1)
+                                    .toUpperCase();
+
+                                if (['A', 'B', 'C', 'D']
+                                    .contains(lastCharacter)) {
+                                  stt.stop();
+                                  flutterTts.speak(spoken);
+                                  spoken = lastCharacter;
+                                } else {
+                                  print(
+                                      "Extracted character is not a valid choice.");
+                                }
+                              } else {
+                                print(
+                                    "No space found or no character after the last space.");
+                              }
+
+                              print(
+                                  "Updated spoken variable: $spoken"); // For debugging
+
+                              return spoken;
+                            }
+
+                            spoken = extractAndUpdateSpoken(spoken);
+
+                            print("Last char: ${spoken}");
+                          });
+                        }
+                      },
+                    );
+                  }
+                } catch (e) {
+                  print("Error initializing STT: $e");
+                }
+
+                showDialog(
+                  context: context,
+                  builder: (context) => ListeningPopup(),
+                  barrierDismissible: true,
+                );
+              }
+
+              startListening().then((value) {
+                setState(() {});
+              });
+              ;
+            }
+            // if (!box.read('useGyroscope')) {
+            //   flutterTts.stop();
+
+            //   // Defining functions in a sensible order
+            //   void mixColors(String selectedChoice) {
+            //     aColor = bColor =
+            //         cColor = dColor = unselected; // Reset all to unselected
+            //     switch (selectedChoice) {
+            //       // Set selected color for the choice
+            //       case 'A':
+            //         aColor = selectedColor;
+            //         break;
+            //       case 'B':
+            //         bColor = selectedColor;
+            //         break;
+            //       case 'C':
+            //         cColor = selectedColor;
+            //         break;
+            //       case 'D':
+            //         dColor = selectedColor;
+            //         break;
+            //     }
+            //   }
+
+            //   void updateUI(String choice) {
+            //     setState(() {
+            //       lastanswer = choice;
+            //       Determiner = choice.codeUnitAt(0) - 'A'.codeUnitAt(0) + 1;
+            //       useranswers[currentindex] = Determiner;
+            //       mixColors(choice);
+            //     });
+            //   }
+
+            //   void updateAnswerBasedOnSpoken(String spoken) {
+            //     String choice = '';
+            //     if (spoken == 'a' || spoken == 'one') {
+            //       choice = 'A';
+            //     } else if (spoken == 'b' || spoken == 'two') {
+            //       choice = 'B';
+            //     } else if (spoken == 'c' || spoken == 'three') {
+            //       choice = 'C';
+            //     } else if (spoken == 'd' || spoken == 'four') {
+            //       choice = 'D';
+            //     }
+
+            //     if (choice.isNotEmpty) {
+            //       updateUI(choice);
+            //     }
+            //   }
+
+            //   void processResult(String spoken) {
+            //     setState(() {
+            //       this.spoken = spoken;
+            //       flutterTts.speak(spoken); // Echo back the recognized words
+            //       updateAnswerBasedOnSpoken(spoken.toLowerCase());
+            //     });
+            //   }
+
+            //   Future<void> startListening() async {
+            //     await Future.delayed(
+            //         Duration(seconds: 5)); // Initial delay before listening
+            //     try {
+            //       var available = await stt.initialize();
+            //       if (available) {
+            //         stt.listen(
+            //           onResult: (result) {
+            //             if (result.recognizedWords.isNotEmpty) {
+            //               processResult(result.recognizedWords);
+            //             }
+            //           },
+            //           listenFor: Duration(
+            //               seconds: 10), // Listen for a fixed amount of time
+            //           pauseFor: Duration(
+            //               seconds: 3), // Pause after a user stops speaking
+            //         );
+            //       }
+            //     } catch (e) {
+            //       print("Error initializing STT: $e");
+            //     }
+
+            //     showDialog(
+            //       context: context,
+            //       builder: (context) => ListeningPopup(),
+            //       barrierDismissible: true,
+            //     ).then((_) {
+            //       setState(() {});
+            //     });
+            //   }
+
+            //   startListening();
+            // }
           },
           onLongPressEnd: (details) {
+            if (!box.read('useGyroscope')) {
+              setState(() {});
+              print("Longpress End");
+            }
             setState(() {
               floodgate = false;
             });
@@ -491,12 +733,11 @@ class _InternetquestionSightState extends State<InternetquestionSight>
             }
           },
           onVerticalDragUpdate: (DragUpdateDetails details) {
-            // Handle vertical drag update
-
             remainingtime();
           },
           onDoubleTap: () {
             print(Determiner);
+
             setState(() {
               floodgate = false;
             });
@@ -505,6 +746,8 @@ class _InternetquestionSightState extends State<InternetquestionSight>
               setState(() {
                 if (currentindex < widget.questions.length - 1) {
                   currentindex++;
+                  print("Next+Question");
+                  print(widget.questions[currentindex]);
                 } else if (currentindex == widget.questions.length - 1) {
                   setState(() {
                     currentindex = currentindex;

@@ -1,7 +1,11 @@
+import 'package:desktop/screens/firstpage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: FMainpage(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
