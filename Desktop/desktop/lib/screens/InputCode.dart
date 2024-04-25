@@ -1,12 +1,13 @@
 import 'dart:convert';
 // import 'package:hive/hive.dart';
+import 'package:desktop/screens/question.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:tutorialapp/sightinternetquestions.dart';
 //import 'package:flutter_tts/flutter_tts.dart';
 // import 'package:tutorialapp/sidebarsight.dart';
-import 'package:desktopapp/quesiton.dart';
+
 import 'package:flutter_tts/flutter_tts.dart';
 // import 'package:hive/hive.dart';
 
@@ -19,7 +20,7 @@ class Inputcode extends StatefulWidget {
 
 class _InputcodeState extends State<Inputcode> {
   FocusNode _inputcodefield = FocusNode();
-  final _mybox = Hive.box('dotBox');
+  // final _mybox = Hive.box('dotBox');
   FlutterTts flutterTts = FlutterTts();
   late String spoken;
 
@@ -343,9 +344,9 @@ class _InputcodeState extends State<Inputcode> {
 
   void _sendCode() async {
     if (codetext.text.isNotEmpty) {
-      _mybox.put(57, codetext.text);
+      // _mybox.put(57, codetext.text);
       Response<Map> response = await Dio().post(
-          "http://192.168.137.1:5000/api/exam/get-question",
+          "http://192.168.1.8:5000/api/exam/get-question",
           data: {
             "code": codetext.text,
           },
@@ -369,11 +370,11 @@ class _InputcodeState extends State<Inputcode> {
           : int.tryParse(suns[0].timeall!);
       print(internettime);
       // _mybox.put(57,codetext.text);
-      // Navigator.of(context).push(MaterialPageRoute(
-      //     builder: (context) => Question(
-      //           questions: suns,
-      //           seconds: internettime!,
-      //         )));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Question(
+                questions: suns,
+                seconds: internettime!,
+              )));
     }
   }
 

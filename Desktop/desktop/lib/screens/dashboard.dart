@@ -2,6 +2,7 @@
 // import 'package:desktopapp/inputcode.dart';
 // import 'package:desktopapp/read.dart';
 // import 'package:desktopapp/globals.dart';
+import 'package:desktop/screens/InputCode.dart';
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 // import 'package:window_manager/window_manager.dart';
@@ -213,8 +214,8 @@ class _NontitleState extends State<Dashboard> {
                       ElevatedButton(
                         focusNode: _Test,
                         onPressed: () {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) => Inputcode()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Inputcode()));
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 9,

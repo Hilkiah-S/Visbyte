@@ -1,4 +1,4 @@
-import 'package:desktopapp/finalpage.dart';
+// import 'package:desktopapp/finalpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -6,7 +6,7 @@ import 'dart:async';
 // import 'package:sensors_plus/sensors_plus.dart';
 // import 'package:tutorialapp/pass.dart';
 //import 'package:flutter_tts/flutter_tts.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+// import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 // import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:math';
 import 'package:flutter_tts/flutter_tts.dart';
