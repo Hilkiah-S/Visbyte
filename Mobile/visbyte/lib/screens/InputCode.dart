@@ -214,7 +214,7 @@ class _InputcodeState extends State<Inputcode> {
 
           // await Dio().post(
           //     "https://isub.addisphoenix.com/visbyte/berhan-backend/api/exam/get-question",
-          await Dio().post("http://192.168.137.1:5000/api/exam/get-question",
+          await Dio().post("http://192.168.43.42:5000/api/exam/get-question",
               data: {
                 "code": codetext.text,
               },

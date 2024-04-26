@@ -1,5 +1,6 @@
 import 'dart:convert';
 // import 'package:hive/hive.dart';
+import 'package:desktop/http/endpoint.dart';
 import 'package:desktop/screens/question.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 // import 'package:tutorialapp/sightinternetquestions.dart';
 //import 'package:flutter_tts/flutter_tts.dart';
 // import 'package:tutorialapp/sidebarsight.dart';
-
+import 'package:desktop/global/global.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 // import 'package:hive/hive.dart';
 
@@ -346,7 +347,7 @@ class _InputcodeState extends State<Inputcode> {
     if (codetext.text.isNotEmpty) {
       // _mybox.put(57, codetext.text);
       Response<Map> response = await Dio().post(
-          "http://192.168.1.8:5000/api/exam/get-question",
+          'http://localhost:5000/api/exam/get-question',
           data: {
             "code": codetext.text,
           },

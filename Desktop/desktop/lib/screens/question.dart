@@ -1,4 +1,5 @@
 // import 'package:desktopapp/finalpage.dart';
+import 'package:desktop/screens/finalpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -276,15 +277,16 @@ class _QuestionState extends State<Question> with WidgetsBindingObserver {
       setState(() {
         firsttime = false;
       });
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => FINALPAGE(
-      //             answersinternet: answers,
-      //             answersusers: useranswers,
-      //             total: correct,
-      //           )),
-      // );
+      flutterTts.stop();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FINALPAGE(
+                  answersinternet: answers,
+                  answersusers: useranswers,
+                  total: correct,
+                )),
+      );
       print("New Useranswer");
     }
   }
